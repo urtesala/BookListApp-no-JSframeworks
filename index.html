@@ -4,15 +4,56 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book list app</title>
-    <link rel="stylesheet" href="./style/style.css" />
+    <title>Book List App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/5/morph/bootstrap.min.css"
+    />
     <!-- itraukiu javascript -->
     <script src="./js/main.js" defer></script>
   </head>
 
   <body>
-    <div class="container">
-      <h1>New_project</h1>
+    <div class="container mt-4">
+      <h1 class="display-4 text-center">
+        <i class="fa-solid fa-book-open text-primary"></i>
+        My
+        <span class="text-primary">Book</span> List
+      </h1>
+      <form id="book-form">
+        <div class="form-group gap-2">
+          <label for="title" class="form-label mt-4">Title</label>
+          <input type="text" id="title" class="form-control" />
+        </div>
+        <div class="form-group gap-2">
+          <label for="author" class="form-label mt-4">Author</label>
+          <input type="text" id="author" class="form-control" />
+        </div>
+        <div class="form-group gap-2">
+          <label for="isbn" class="form-label mt-4">ISBN#</label>
+          <input type="text" id="isbn" class="form-control" />
+        </div>
+        <input
+          type="submit"
+          value="Add Book"
+          class="btn btn-lg mt-4 form-control"
+        />
+      </form>
+      <table class="table table-hover mt-5">
+        <thead>
+          <tr class="table-active">
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN#</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="book-list"></tbody>
+      </table>
     </div>
   </body>
 </html>
