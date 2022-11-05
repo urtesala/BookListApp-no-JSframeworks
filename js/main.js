@@ -48,6 +48,12 @@ class UI {
     list.appendChild(row);
   }
 
+  static deleteBook(el) {
+    if (el.classList.contains("delete")) {
+      el.parentElement.parentElement.remove();
+    }
+  }
+
   static clearFields() {
     document.getElementById("title").value = "";
     document.getElementById("author").value = "";
@@ -84,3 +90,8 @@ document.getElementById("book-form").addEventListener("submit", (e) => {
 });
 
 //^ Event: Remove a Book
+
+document.getElementById("book-list").addEventListener("click", (e) => {
+  //   check the clicks ----> console.log(e.target);
+  UI.deleteBook(e.target);
+});
