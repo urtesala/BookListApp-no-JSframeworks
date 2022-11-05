@@ -54,6 +54,20 @@ class UI {
     }
   }
 
+  // BUILDING ALERT FROM SCRATCH
+  // <div class = "alert alert-danger"> Message</div>
+  static showAlert(message, className) {
+    const div = document.createElement("div");
+    div.className = `alert alert-${className}`;
+    div.appendChild(document.createTextNode(message));
+    const container = document.querySelector(".container");
+    const form = document.getElementById("book-form");
+    container.insertBefore(div, form);
+
+    // Vanish is 3 seconds
+    setTimeout(() => document.querySelector(".alert").remove(), 3000);
+  }
+
   static clearFields() {
     document.getElementById("title").value = "";
     document.getElementById("author").value = "";
@@ -78,15 +92,23 @@ document.getElementById("book-form").addEventListener("submit", (e) => {
   const author = document.getElementById("author").value;
   const isbn = document.getElementById("isbn").value;
 
-  // instatiante book
-  const book = new Book(title, author, isbn);
-  console.log("book ===", book);
+  // Validate
+  if (title === "" || author === "" || isbn === "") {
+    UI.showAlert("Please fill all the fields", "danger");
+  } else {
+    // instatiate book
+    const book = new Book(title, author, isbn);
+    console.log("book ===", book);
 
-  // Add book to UI
-  UI.addBookToList(book);
+    // Add book to UI
+    UI.addBookToList(book);
 
-  //clear fields afer submition
-  UI.clearFields();
+    //Show success message
+    UI.showAlert("Book Added", "success");
+
+    //clear fields afer submition
+    UI.clearFields();
+  }
 });
 
 //^ Event: Remove a Book
@@ -94,4 +116,7 @@ document.getElementById("book-form").addEventListener("submit", (e) => {
 document.getElementById("book-list").addEventListener("click", (e) => {
   //   check the clicks ----> console.log(e.target);
   UI.deleteBook(e.target);
+
+  //Book removed alert
+  UI.showAlert("Book Removed", "success");
 });
