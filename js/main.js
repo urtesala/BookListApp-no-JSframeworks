@@ -42,10 +42,16 @@ class UI {
     <td>${book.title}</td>
     <td>${book.author}</td>
     <td>${book.isbn}</td>
-    <td><a href="#" class="btn btn-outline-danger btn-sm delete"></a>X</td>
+    <td><a href="#" class="btn btn-outline-danger btn-sm delete">X</a></td>
     `;
 
     list.appendChild(row);
+  }
+
+  static clearFields() {
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("isbn").value = "";
   }
 }
 
@@ -53,6 +59,28 @@ class UI {
 
 //^ Event: Display Books
 
+document.addEventListener("DOMContentLoaded", UI.displayBooks);
+
 //^ Event: Add a Book
+
+document.getElementById("book-form").addEventListener("submit", (e) => {
+  //Prevet actual submit
+  e.preventDefault();
+
+  // get form values
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const isbn = document.getElementById("isbn").value;
+
+  // instatiante book
+  const book = new Book(title, author, isbn);
+  console.log("book ===", book);
+
+  // Add book to UI
+  UI.addBookToList(book);
+
+  //clear fields afer submition
+  UI.clearFields();
+});
 
 //^ Event: Remove a Book
